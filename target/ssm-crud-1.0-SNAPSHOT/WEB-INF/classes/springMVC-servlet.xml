@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           ">
+<!--   springMVC配置文件 包含网站跳转逻辑的控制 配置-->
+
+    <!-- 扫描controller -->
+    <context:component-scan base-package="com.yc.ssm.controller" use-default-filters="false">
+        <!--只扫描控制器-->
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!-- 视图解析器 方便页面返回 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!--注册静态资源 将springmvc不能处理的资源交给tomcat-->
+    <mvc:default-servlet-handler/>
+    <!--注册注解开发驱动 支持springmvc更高级的功能，譬如JSP303校验，更快捷的ajax，映射文件-->
+    <mvc:annotation-driven>
+<!--        <mvc:message-converters>-->
+<!--            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">-->
+<!--                <property name="supportedMediaTypes">-->
+<!--                    <list>-->
+<!--                        <value>application/json</value>-->
+<!--                    </list>-->
+<!--                </property>-->
+<!--            </bean>-->
+<!--        </mvc:message-converters>    -->
+    </mvc:annotation-driven>
+
+    <!--    异常解析器-->
+<!--    <mvc:interceptors>-->
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/user/delete"/>-->
+<!--            <bean class="com.yc.ssm.intercepter.LoginIntercepter"/>-->
+<!--        </mvc:interceptor>-->
+<!--    </mvc:interceptors>-->
+
+</beans>
